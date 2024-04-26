@@ -34,6 +34,7 @@ let x1 = game.createSprite(4, 3)
 mainCharacter.turn(Direction.Left, 90)
 let x = 250
 let x2 = 2
+basic.showNumber(0)
 S6.delete()
 S7.delete()
 x1.delete()
