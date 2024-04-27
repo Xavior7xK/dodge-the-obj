@@ -1,6 +1,6 @@
 input.onButtonPressed(Button.A, function () {
     mainCharacter.move(1)
-    basic.pause(500)
+    basic.pause(600)
     mainCharacter.move(-1)
 })
 input.onButtonPressed(Button.AB, function () {
@@ -8,7 +8,7 @@ input.onButtonPressed(Button.AB, function () {
         Fireball = game.createSprite(2, 2)
         Fireball.set(LedSpriteProperty.X, 1)
         Fireball.set(LedSpriteProperty.Y, 3)
-        for (let index = 0; index < 3; index++) {
+        for (let index = 0; index < 4; index++) {
             basic.pause(500)
             Fireball.move(1)
         }
@@ -36,24 +36,26 @@ let S6 = game.createSprite(4, 3)
 let S7 = game.createSprite(4, 2)
 let x1 = game.createSprite(4, 3)
 mainCharacter.turn(Direction.Left, 90)
-let x = 250
+let x = 350
 let x2 = 2
 S6.delete()
 S7.delete()
 x1.delete()
 game.setLife(3)
+led.setBrightness(100)
 Fireball = game.createSprite(2, 2)
 Fireball.delete()
+led.setBrightness(255)
 let live1 = game.createSprite(0, 0)
 let live2 = game.createSprite(1, 0)
 let live3 = game.createSprite(2, 0)
 let live4 = 3
 firex = 3
-let obsata = randint(1, 3)
+let obsata = randint(4, 4)
 game.setScore(0)
 basic.pause(3000)
 loops.everyInterval(1, function () {
-    x = x - 1
+    x = x - 2
     if (obsata == 1) {
         S6 = game.createSprite(4, 3)
         for (let index = 0; index < 5; index++) {
@@ -84,6 +86,17 @@ loops.everyInterval(1, function () {
         S6.delete()
         S7.delete()
         firex = firex + 0.2
+    } else if (obsata == 4) {
+        S6 = game.createSprite(4, 1)
+        S7 = game.createSprite(4, 2)
+        for (let index = 0; index < 5; index++) {
+            basic.pause(x)
+            S6.move(-1)
+            S7.move(-1)
+        }
+        S6.delete()
+        S7.delete()
+        firex = firex + 0.2
     } else {
     	
     }
@@ -104,24 +117,34 @@ basic.forever(function () {
         }
         basic.pause(500)
     }
+    if (input.buttonIsPressed(Button.B)) {
+        music.play(music.stringPlayable("F C5 - - - - - - ", 500), music.PlaybackMode.UntilDone)
+        game.addScore(0.5)
+    }
+    if (input.buttonIsPressed(Button.A)) {
+        music.play(music.stringPlayable("F A - - - - - - ", 500), music.PlaybackMode.UntilDone)
+        game.addScore(1)
+    }
+    if (input.buttonIsPressed(Button.AB)) {
+        music.play(music.stringPlayable("A C G C E C D C ", 500), music.PlaybackMode.UntilDone)
+        game.addScore(-1)
+    }
     if (x2 < 0) {
         basic.showString("You Lose")
     }
     if (Fireball.isTouching(x1)) {
         x1.delete()
+        Fireball.delete()
     }
     if (Fireball.isTouching(S6)) {
         S6.delete()
+        Fireball.delete()
     }
     if (Fireball.isTouching(S7)) {
         S7.delete()
+        Fireball.delete()
     }
 })
 control.inBackground(function () {
-    if (input.buttonIsPressed(Button.B)) {
-        music.play(music.stringPlayable("F C5 - - - - - - ", 500), music.PlaybackMode.UntilDone)
-    }
-    if (input.buttonIsPressed(Button.A)) {
-        music.play(music.stringPlayable("F A - - - - - - ", 500), music.PlaybackMode.UntilDone)
-    }
+	
 })
