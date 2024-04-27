@@ -4,14 +4,17 @@ input.onButtonPressed(Button.A, function () {
     mainCharacter.move(-1)
 })
 input.onButtonPressed(Button.AB, function () {
-    Fireball = game.createSprite(2, 2)
-    Fireball.set(LedSpriteProperty.X, 1)
-    Fireball.set(LedSpriteProperty.Y, 3)
-    for (let index = 0; index < 3; index++) {
-        basic.pause(500)
-        Fireball.move(1)
+    if (firex >= 1) {
+        Fireball = game.createSprite(2, 2)
+        Fireball.set(LedSpriteProperty.X, 1)
+        Fireball.set(LedSpriteProperty.Y, 3)
+        for (let index = 0; index < 3; index++) {
+            basic.pause(500)
+            Fireball.move(1)
+        }
+        firex = 0
+        Fireball.delete()
     }
-    Fireball.delete()
 })
 input.onButtonPressed(Button.B, function () {
     mainCharacter.move(2)
@@ -20,6 +23,7 @@ input.onButtonPressed(Button.B, function () {
     basic.pause(100)
     mainCharacter.move(-1)
 })
+let firex = 0
 let Fireball: game.LedSprite = null
 let mainCharacter: game.LedSprite = null
 mainCharacter = game.createSprite(1, 3)
@@ -34,7 +38,6 @@ let x1 = game.createSprite(4, 3)
 mainCharacter.turn(Direction.Left, 90)
 let x = 250
 let x2 = 2
-basic.showNumber(0)
 S6.delete()
 S7.delete()
 x1.delete()
@@ -45,24 +48,46 @@ let live1 = game.createSprite(0, 0)
 let live2 = game.createSprite(1, 0)
 let live3 = game.createSprite(2, 0)
 let live4 = 3
-basic.pause(2000)
+firex = 3
+let obsata = randint(1, 3)
+game.setScore(0)
+basic.pause(3000)
 loops.everyInterval(1, function () {
-    x = x * 0.95
-    S6 = game.createSprite(4, 3)
-    for (let index = 0; index < 5; index++) {
-        basic.pause(x)
-        S6.move(-1)
+    x = x - 1
+    if (obsata == 1) {
+        S6 = game.createSprite(4, 3)
+        for (let index = 0; index < 5; index++) {
+            basic.pause(x)
+            S6.move(-1)
+        }
+        S6.delete()
+        firex = firex + 0.2
+    } else if (obsata == 2) {
+        S7 = game.createSprite(4, 2)
+        x1 = game.createSprite(4, 3)
+        for (let index = 0; index < 5; index++) {
+            basic.pause(x)
+            S7.move(-1)
+            x1.move(-1)
+        }
+        S7.delete()
+        x1.delete()
+        firex = firex + 0.2
+    } else if (obsata == 3) {
+        S6 = game.createSprite(4, 3)
+        S7 = game.createSprite(4, 1)
+        for (let index = 0; index < 5; index++) {
+            basic.pause(x)
+            S6.move(-1)
+            S7.move(-1)
+        }
+        S6.delete()
+        S7.delete()
+        firex = firex + 0.2
+    } else {
+    	
     }
-    S6.delete()
-    S7 = game.createSprite(4, 2)
-    x1 = game.createSprite(4, 3)
-    for (let index = 0; index < 5; index++) {
-        basic.pause(x)
-        S7.move(-1)
-        x1.move(-1)
-    }
-    S7.delete()
-    x1.delete()
+    obsata = randint(1, 3)
 })
 basic.forever(function () {
     if (mainCharacter.isTouching(S6) || mainCharacter.isTouching(S7) || mainCharacter.isTouching(x1)) {
