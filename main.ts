@@ -55,7 +55,7 @@ let obsata = randint(4, 4)
 game.setScore(0)
 basic.pause(3000)
 loops.everyInterval(1, function () {
-    x = x - 2
+    x = x - 5
     if (obsata == 1) {
         S6 = game.createSprite(4, 3)
         for (let index = 0; index < 5; index++) {
@@ -145,7 +145,4 @@ basic.forever(function () {
         S7.delete()
         Fireball.delete()
     }
-})
-control.inBackground(function () {
-	
 })
