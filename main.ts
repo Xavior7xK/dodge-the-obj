@@ -63,6 +63,7 @@ loops.everyInterval(1, function () {
             S6.move(-1)
         }
         S6.delete()
+        game.addScore(0.5)
         firex = firex + 0.2
     } else if (obsata == 2) {
         S7 = game.createSprite(4, 2)
@@ -74,6 +75,7 @@ loops.everyInterval(1, function () {
         }
         S7.delete()
         x1.delete()
+        game.addScore(1)
         firex = firex + 0.2
     } else if (obsata == 3) {
         S6 = game.createSprite(4, 3)
@@ -86,6 +88,7 @@ loops.everyInterval(1, function () {
         S6.delete()
         S7.delete()
         firex = firex + 0.2
+        game.addScore(1)
     } else if (obsata == 4) {
         S6 = game.createSprite(4, 1)
         S7 = game.createSprite(4, 2)
@@ -97,6 +100,7 @@ loops.everyInterval(1, function () {
         S6.delete()
         S7.delete()
         firex = firex + 0.2
+        game.addScore(0.5)
     } else {
     	
     }
@@ -119,15 +123,12 @@ basic.forever(function () {
     }
     if (input.buttonIsPressed(Button.B)) {
         music.play(music.stringPlayable("F C5 - - - - - - ", 500), music.PlaybackMode.UntilDone)
-        game.addScore(0.5)
     }
     if (input.buttonIsPressed(Button.A)) {
         music.play(music.stringPlayable("F A - - - - - - ", 500), music.PlaybackMode.UntilDone)
-        game.addScore(1)
     }
     if (input.buttonIsPressed(Button.AB)) {
         music.play(music.stringPlayable("A C G C E C D C ", 500), music.PlaybackMode.UntilDone)
-        game.addScore(-1)
     }
     if (x2 < 0) {
         basic.showString("You Lose")
